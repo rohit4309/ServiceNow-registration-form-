@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <title>Registration Form - ServiceNow ITSM Training</title>
+         <link rel="stylesheet"  href="style.css">
+         <script src="https://kit.fontawesome.com/535a0af1a1.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+           <div class="container">
+                <div class="formbox">
+                     <h1 id="title">Registration Form</h1>
+                     <form id="Registration-form">
+                        <div class="input-group">
+                            <div class="input-filed" id="name">
+                                <i class="fa-solid fa-user"></i>
+                                <input type="text" placeholder="name" name="name">
+                            </div>
+                            <div class="input-filed" id="email">
+                                <i class="fa-solid fa-envelope"></i>
+                                <input type="email" placeholder="Email address" name="email">
+                            </div>
+                            <div class="input-filed" id="mobile">
+                                <i class="fa-solid fa-mobile"></i>
+                                <input type="number" placeholder="mobile Number" name="mobile">
+                            </div>
+                            <h4 class="intro">Course:</h4><p class="intro"> ServiceNow (admin + Development) - Start on 14/07/2024 - 1 month</p>
+                            <h4 class="intro">Trainer:</h4><p class="intro">Mr.Viney Kumar - ServiceNow Developer(Core)</p>
+                
+                        </div>
+                        <div class="btn-field">
+                            <button type="submit" id="Regbtn">Enroll Now! - For Demo classes</button>
+                        </div>
+                     </form>
+                </div>
+           </div>
+
+           <script>
+                     document.getElementById('Registration-form').addEventListener('submit', function(event) {
+                     event.preventDefault();
+
+      // Disable the submit button to prevent multiple submissions
+                    var submitButton = document.getElementById('Regbtn');
+                    submitButton.disabled = true;
+                    submitButton.textContent = 'Submitting...'; // Optionally, change button text
+      
+                    var formData = new FormData(this);
+
+      // Send form data to Google Apps Script
+                fetch('https://script.google.com/macros/s/AKfycbx4PrbnC9rkHQZxhwNTZn4VBrKw0hAl9lo4etvOSjqvtwAFVXUo8h6NhdQmFdvKPvuSEA/exec', {
+                   method: 'POST',
+                   body: formData
+                  })
+               .then(response => {
+                   if (response.ok) {
+                  console.log('Form data submitted successfully');
+          // After successful submission, navigate to a different website
+                  window.location.href = 'ThankYou.html'; // Replace with your desired URL
+                    
+                  } else {
+                throw new Error('Failed to submit form data');
+                     }
+             })
+            .catch(error => {
+             console.error('Error submitting form data:', error);
+              alert('Registration failed. Please try again.');
+            submitButton.disabled = false; // Re-enable the submit button on error
+             submitButton.textContent = 'Submit'; // Restore button text
+            });
+        });
+  </script>
+                 
+           </script>
+    </body>
+
+</html>
